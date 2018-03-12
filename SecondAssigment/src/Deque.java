@@ -32,14 +32,13 @@ public class Deque<Item> /*implements Iterable<Item>*/ {
             first = new Node();
             first.item = item;
             last = first;
+        } else {
+            Node oldFirst = first;
+            first = new Node();
+            first.item = item;
+            first.next = oldFirst;
+            oldFirst.prev = first;
         }
-
-        Node oldFirst = first;
-        first = new Node();
-        first.item = item;
-        first.next = oldFirst;
-        oldFirst.prev = first;
-
         n++;
     }         // add the item to the front
     public void addLast(Item item) {
@@ -50,13 +49,14 @@ public class Deque<Item> /*implements Iterable<Item>*/ {
             first = new Node();
             first.item = item;
             last = first;
+        } else {
+            Node oldLast = last;
+            last = new Node();
+            last.item = item;
+            oldLast.next = last;
+            last.prev = oldLast;
         }
 
-        Node oldLast = last;
-        last = new Node();
-        last.item = item;
-        oldLast.next = last;
-        last.prev = oldLast;
 
         n++;
     }           // add the item to the end
@@ -66,8 +66,13 @@ public class Deque<Item> /*implements Iterable<Item>*/ {
         }
 
         Item item = first.item;
-        first = first.next;
-        first.prev = null;
+        if (n == 1) {
+            first = null;
+            last = null;
+        } else {
+            first = first.next;
+            first.prev = null;
+        }
         n--;
         return item;
     }               // remove and return the item from the front
@@ -77,8 +82,14 @@ public class Deque<Item> /*implements Iterable<Item>*/ {
         }
 
         Item item = last.item;
-        last = last.prev;
-        last.next = null;
+        if (n == 1) {
+            first = null;
+            last = null;
+        } else {
+            last = last.prev;
+            last.next = null;
+        }
+
         n--;
         return item;
     }               // remove and return the item from the end
