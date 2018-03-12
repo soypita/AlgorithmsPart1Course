@@ -1,7 +1,7 @@
-import java.util.Iterator;
+//import java.util.Iterator;
 import java.lang.IllegalArgumentException;
 import java.util.NoSuchElementException;
-public class Deque<Item> implements Iterable<Item> {
+public class Deque<Item> /*implements Iterable<Item>*/ {
     private class Node {
         private Item item;
         private Node next;
@@ -82,6 +82,6 @@ public class Deque<Item> implements Iterable<Item> {
         n--;
         return item;
     }               // remove and return the item from the end
-    public Iterator<Item> iterator()         // return an iterator over items in order from front to end
-    public static void main(String[] args)   // unit testing (optional)
+//    public Iterator<Item> iterator()  {};        // return an iterator over items in order from front to end
+      // unit testing (optional)
 }
