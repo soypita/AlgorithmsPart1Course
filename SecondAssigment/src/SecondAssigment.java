@@ -1,5 +1,4 @@
 
-
 public class SecondAssigment {
     public static void main(String[] args) {
         Deque<Integer> deq = new Deque<>();

@@ -1,7 +1,8 @@
 //import java.util.Iterator;
 import java.lang.IllegalArgumentException;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
-public class Deque<Item> /*implements Iterable<Item>*/ {
+public class Deque<Item> implements Iterable<Item>  {
     private class Node {
         private Item item;
         private Node next;
@@ -93,6 +94,32 @@ public class Deque<Item> /*implements Iterable<Item>*/ {
         n--;
         return item;
     }               // remove and return the item from the end
-//    public Iterator<Item> iterator()  {};        // return an iterator over items in order from front to end
-      // unit testing (optional)
+    public Iterator<Item> iterator()  {
+        return new DequeIterator();
+    };        // return an iterator over items in order from front to end
+
+
+    private class DequeIterator implements Iterator<Item> {
+        private Node current = first;
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public Item next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            Item item = current.item;
+            current = current.next;
+
+            return item;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+    }
 }
